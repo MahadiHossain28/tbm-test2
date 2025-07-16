@@ -3,6 +3,7 @@ import {useMemo, useState} from "react";
 import allData from '@/data/mockData.json';
 import {AllData, Match, MatchEntry} from "@/type/Type";
 import MatchHeader from "@/components/MatchHeader";
+import OddsDisplay from "@/components/OddsDisplay";
 
 export default function Home() {
 
@@ -87,9 +88,19 @@ export default function Home() {
                                   })}
                               </ul>
                           )}
+                          {searchTerm && filteredMatches.length <= 0 && (
+                              <div className='absolute z-10 w-full bg-gray-800 border border-gray-700 rounded-lg mt-1 p-3 max-h-100 overflow-y-auto'>
+                                  No matches found by this Match ID or Team Name.
+                              </div>
+                          )}
                       </div>
                       {selectedMatch && (
-                            <MatchHeader match={selectedMatch} />
+                          <div className="bg-gray-800 rounded-lg p-6">
+                              <MatchHeader match={selectedMatch} />
+                              <div className="overflow-x-auto">
+                                  <OddsDisplay match={selectedMatch} />
+                              </div>
+                          </div>
                       )}
                 </div>
           </div>
